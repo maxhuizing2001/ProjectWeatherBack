@@ -33,23 +33,23 @@ class Database:
         self.cursor.execute(query, value)
         self.conn.commit()
 
-    def insertMetaDataPy(self, device_eui, Light, Pressure, datetime1, Temperature):
+    def insertMetaDataPy(self, device_eui,datetime1, Temperature, Light, Pressure):
         #SQL Querrie to insert data in database
-        sql = "INSERT INTO wheater_forecast (device_eui, date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,%s,DEFAULT,%s,DEFAULT,%s)"
+        sql = "INSERT INTO weather_forecast (device_eui, date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,DEFAULT,%s,%s,DEFAULT,%s)"
         val = (device_eui, datetime1,Temperature,Light,Pressure)
         self.cursor.execute(sql, val)
         self.conn.commit()
 
-    def insertMetaDataLhtSaxion(self, datetime1,device_eui,Humidity,Temp_Out,Temperature):
+    def insertMetaDataLhtSaxion(self, device_eui,datetime1,Temp_Out,Temperature,Humidity):
         #SQL Querrie to insert data in database
-        sql = "INSERT INTO wheater_forecast (device_eui,date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,%s,%s,DEFAULT,%s,DEFAULT)"
+        sql = "INSERT INTO weather_forecast (device_eui,date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,%s,%s,DEFAULT,%s,DEFAULT)"
         val = (device_eui,datetime1,Temperature,Temp_Out,Humidity)
         self.cursor.execute(sql, val)
         self.conn.commit()
 
     def insertMetaDataElse(self, Light,datetime1,device_eui,Humidity,Temperature):
         #SQL Querrie to insert data in database
-        sql = "INSERT INTO wheater_forecast (device_eui,date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,%s,DEFAULT,%s,%s,DEFAULT)"
+        sql = "INSERT INTO weather_forecast (device_eui,date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,DEFAULT,%s,%s,%s,DEFAULT)"
         val = (device_eui,datetime1,Temperature,Light,Humidity)
         self.cursor.execute(sql, val)
         self.conn.commit()

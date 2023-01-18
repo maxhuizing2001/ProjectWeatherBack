@@ -1,6 +1,4 @@
 #Robert Alexandru Calin 479454 v1
-
-from sqlite3 import Cursor
 import paho.mqtt.client as mqtt
 from Location import Location
 from Database import Database
@@ -43,17 +41,17 @@ def main():
         if sensorName == 'py-saxion' or sensorName == 'py-wierden':
             metaDataPySax = metaData.getMetaDataPySaxWier(msg)
             airTime = metaDataPySax[3]
-            database.insertMetaDataPy(metaDataPySax[0], metaDataPySax[1], _dateAndTime, deviceData[0], metaDataPySax[2])
+            database.insertMetaDataPy(deviceData[0], _dateAndTime, metaDataPySax[2], metaDataPySax[0], metaDataPySax[1])
         
         elif sensorName == 'lht-saxion':
             metaLHTSaxion = metaData.getMetaDatalhtSax(msg)
             airTime = metaLHTSaxion[3]
-            database.insertMetaDataLhtSaxion(_dateAndTime, deviceData[0], metaLHTSaxion[0], metaLHTSaxion[1], metaLHTSaxion[2])
+            database.insertMetaDataLhtSaxion(deviceData[0], _dateAndTime, metaLHTSaxion[1], metaLHTSaxion[0], metaLHTSaxion[2])
         
         else:
             otherDevices = metaData.getMetaDataElse(msg)
             airTime = otherDevices[3]
-            database.insertMetaDataElse(otherDevices[0], _dateAndTime, deviceData[0], otherDevices[1], otherDevices[2])
+            database.insertMetaDataElse(deviceData[0], _dateAndTime, otherDevices[2], otherDevices[0], otherDevices[1])
         
         database.insertDevData(listLatAndLong[0], listLatAndLong[1], airTime, deviceData[0], _dateAndTime, deviceData[3])
 
