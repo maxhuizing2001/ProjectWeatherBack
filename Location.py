@@ -1,7 +1,3 @@
-
-from pickle import TRUE
-from geopy.geocoders import Nominatim
-
 class Location:
 
 	#print("Data van locatie is:" +locationData+ "EINDE"+"\n")
