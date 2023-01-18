@@ -47,10 +47,10 @@ class Database:
         self.cursor.execute(sql, val)
         self.conn.commit()
 
-    def insertMetaDataElse(self, Light,datetime1,device_eui,Humidity,Temperature):
+    def insertMetaDataElse(self, device_eui,datetime1,Temperature_out, Light, Humidity):
         #SQL Querrie to insert data in database
-        sql = "INSERT INTO weather_forecast (device_eui,date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,DEFAULT,%s,%s,%s,DEFAULT)"
-        val = (device_eui,datetime1,Temperature,Light,Humidity)
+        sql = "INSERT INTO weather_forecast (device_eui,date_time,temperature,temperature_inside,ambient_light,humidity,barometric_pressure) VALUES (%s,%s,%s,DEFAULT,%s,%s,DEFAULT)"
+        val = (device_eui,datetime1,Temperature_out,Light,Humidity)
         self.cursor.execute(sql, val)
         self.conn.commit()
 

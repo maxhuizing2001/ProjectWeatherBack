@@ -25,9 +25,7 @@ class MetaData:
         listDeviceData.append(RSSI)
         print("DEVICEDATA")
         print("----------------------------------------")
-        for x in listDeviceData:
-            print(x, "Type: ", type(x))
-        print("\n")
+        
         return listDeviceData
 
 
@@ -66,9 +64,7 @@ class MetaData:
         listMetaData.append(AirTime)
         print("METADATAPYSAX")
         print("----------------------------------------")
-        for x in listMetaData:
-            print(x, "Type: ", type(x))
-        print("\n")
+        
         return listMetaData
 
     def getMetaDatalhtSax(self, msg):
@@ -86,7 +82,7 @@ class MetaData:
 
         #Selecting the data
         Temp_Out = str(msg.payload)[temp_out + 10: temperature - 2]
-        Temperature = str(msg.payload)[temperature + 12: key2 - 3]
+        Temperature = str(msg.payload)[temperature + 11: key2 - 3]
         Humidity= str(msg.payload)[humidity + 9: temp_out - 2]
         AirTime = str(msg.payload)[findAir + 19:findAir3 -3]
         
@@ -106,9 +102,7 @@ class MetaData:
 
         print("METADATALHTSAXIO")
         print("----------------------------------------")
-        for x in listMetaData:
-            print(x, "Type: ", type(x))
-        print("\n")
+        
         return listMetaData
 
     def getMetaDataElse(self, msg):
@@ -146,7 +140,5 @@ class MetaData:
 
         print("ELSE")
         print("----------------------------------------")
-        for x in listMetaData:
-            print(x, "Type: ", type(x))
-        print("\n")
+        
         return listMetaData

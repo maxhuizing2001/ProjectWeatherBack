@@ -27,4 +27,6 @@ class Location:
 
 		listLocationData.append(latitude)
 		listLocationData.append(longitude)
+		print(latitude)
+		print(longitude)
 		return listLocationData
