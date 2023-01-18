@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector.constants import ClientFlag
 
 class Database:
-    def _init_(self):
+    def __init__(self):
         config = {
             'user': 'u1656_BotTzlvfQc',
             'password': '8J9NeEVFXAIEY+2Jn+^8@sWn',
