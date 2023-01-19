@@ -1,3 +1,4 @@
+from email.policy import default
 import mysql.connector 
 from mysql.connector.constants import ClientFlag
 
@@ -108,6 +109,9 @@ class Database:
         - datetime1: Date and time from when the data was collected from the sensor.
         - RSSI: RSSI from the sensor.
         """
+        if ~bool(latitude) or ~bool(longitude):
+            return
+
         sqlDevMeta = "INSERT INTO device_metadata (latitude, longitude, rssi, air_time,received_at,device_eui) VALUES (%s,%s,%s,%s,%s,%s)"
         valDevMeta = (latitude, longitude,RSSI ,AirTime,datetime1,device_eui)
         self.cursor.execute(sqlDevMeta, valDevMeta)
