@@ -5,13 +5,30 @@ from DateAndTime import DateAndTime
 from MetaData import MetaData
 
 class DeviceDataHandler:
+    """
+    Handles all the data received from the IoT devices, processes it and stores it in a database.
+    """
     def __init__(self):
+        """
+        Initializes instances of the Location, MetaData, Database, and DateAndTime classes.
+        """
         self.location = Location()
         self.metaData = MetaData()
         self.database = Database()
         self.dateAndTime = DateAndTime()
 
+    
     def on_connect(self, client, userdata, flags, rc):
+        """
+        Callback function for when the client connects to the MQTT broker.
+        Subscribes to the topics for the different devices.
+        
+        Parameters:
+        - client (mqtt.Client) : the MQTT client instance
+        - userdata: user defined data
+        - flags: response flags sent by the broker
+        - rc: the result code of the connection attempt
+        """
         print("Connected with result code " + str(rc))
         client.subscribe("v3/project-software-engineering@ttn/devices/py-wierden/up")
         client.subscribe("v3/project-software-engineering@ttn/devices/py-saxion/up")
@@ -20,7 +37,15 @@ class DeviceDataHandler:
         client.subscribe("v3/project-software-engineering@ttn/devices/lht-saxion/up")
     
     def on_message(self, client, userdata, msg):
-        #location program
+        """
+        Callback function for when a message is received on one of the subscribed topics.
+        Processes the data in the message and stores it in the database.
+        
+        Parameters:
+        - client (mqtt.Client) : the MQTT client instance
+        - userdata: user defined data
+        - msg (mqtt.MQTTMessage) : the MQTT message object
+        """
         listLatAndLong = self.location.getLocationData(msg)
         deviceData = self.metaData.getDeviceData(msg)
         self.database.insertDeviceData(deviceData)
@@ -47,6 +72,11 @@ class DeviceDataHandler:
         self.database.insertDevData(listLatAndLong[0], listLatAndLong[1], airTime, deviceData[0], _dateAndTime, deviceData[3])
 
 def main():
+    """
+    The main function of the script.
+    Creates an instance of the DeviceDataHandler class and sets up the MQTT client callbacks.
+    Connects to the MQTT broker and runs the client's main loop indefinitely.
+    """
     client = mqtt.Client()
     device_data_handler = DeviceDataHandler()
     client.on_connect =device_data_handler.on_connect

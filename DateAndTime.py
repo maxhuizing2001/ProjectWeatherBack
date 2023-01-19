@@ -1,7 +1,19 @@
 from datetime import datetime,timedelta
 
 class DateAndTime:
+    """
+    The DataAndTime class handels the date and time from the sensors.
+    """
     def getDateAndTime(self, msg):
+        """
+        The getDateAndTime function get the date and time from a sensor and makes 1 variable from the date and time.
+
+        Parameters:
+        -msg: The msg from the sensor.
+
+        Returns:
+        -DateTime1: DateTime1 is the variable with the date and time in 1.
+        """
         #Keys for getting the information
         key1 = str(msg.payload).find('received_at')
         key3 = str(msg.payload).find('uplink_message')

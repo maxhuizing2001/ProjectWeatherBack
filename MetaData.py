@@ -1,6 +1,17 @@
 class MetaData:
-
+    """
+    MetaData gets the metadata available in the diffenrent sensors by extracting the data out of the msg from the given sensor.
+    """
     def getDeviceData(self, msg):
+        """
+        The getDeviceData function gets the device data such as the name and RSSI from the sensor.
+
+        Parameters:
+        -msg: The msg from the sensor.
+
+        Returns:
+        -list: List with the device_eui, SensorName, SensorName and the RSSI.
+        """
         listDeviceData = []
 
         #Finding the eui and saving the value
@@ -13,7 +24,6 @@ class MetaData:
         name2=(msg.topic).find('application_ids')
         SensorName= str(msg.topic)[name1 + 45:name2 - 2]
         
-
         #Finding RSSI
         findRSSI = str(msg.payload).find('rssi')
         findRSSI2 = str(msg.payload).find('channel_rssi')
@@ -30,6 +40,15 @@ class MetaData:
 
 
     def getMetaDataPySaxWier(self, msg):
+        """
+        The getMetaDataPySaxWier function gets the meta data from the Pysaxion sensor and Pywierden sensor.
+
+        Parameters:
+        -msg: The msg from the sensor.
+
+        Returns:
+        -list: List with the light, temperature, pressure and airtime.
+        """
         listMetaData = []
         #Keys for getting the information
         key2 = str(msg.payload).find('rx_metadata')
@@ -68,6 +87,15 @@ class MetaData:
         return listMetaData
 
     def getMetaDatalhtSax(self, msg):
+        """
+        The getMetaDatalhtSax function gets the meta data from the lhtsaxion sensor.
+
+        Parameters:
+        -msg: The msg from the sensor.
+
+        Returns:
+        -list: List with the Temp_Out, temperature, Humidity and airtime.
+        """
         listMetaData = []
 
         #Keys for getting the information
@@ -106,6 +134,15 @@ class MetaData:
         return listMetaData
 
     def getMetaDataElse(self, msg):
+        """
+        The getMetaDatalhtSax function gets the meta data from the lhtsaxion sensor.
+
+        Parameters:
+        -msg: The msg from the sensor.
+
+        Returns:
+        -list: List with the Temp_Out, temperature, Humidity and airtime.
+        """
         listMetaData = []
 
         #Keys for getting the information

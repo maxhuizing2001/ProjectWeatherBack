@@ -1,8 +1,17 @@
 class Location:
-
-	#print("Data van locatie is:" +locationData+ "EINDE"+"\n")
-		
+	"""
+	Location class gets the location data from the sensors.
+	"""
 	def getLocationData(self, msg):
+		"""
+		The getLocationData gets the latitude and longitude the message that is passed to the funciton.
+
+		Parameters:
+		- msg: raw data from the sensor.
+
+		Returns:
+		-List with latitude and longitude.
+		"""
 		listLocationData = []
 		locationReferenceBegin = str(msg.payload).find('location')
 		locationReferenceEnd = str(msg.payload).find('source')
